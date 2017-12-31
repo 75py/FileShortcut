@@ -1,0 +1,39 @@
+<!--
+  ~ Copyright 2017 75py
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">File Shortcut</string>
+
+    <string name="file_path">File path</string>
+    <string name="file_picker">Open file pickers</string>
+    <string name="shortcut_name">Shortcut Name</string>
+    <string name="icon_picker">Choose icon</string>
+
+    <string name="msg_filer_not_found">ERROR: Filer app is not found.</string>
+    <string name="msg_gallery_not_found">ERROR: Gallery app is not found</string>
+    <string name="msg_not_launchable">Openable applications are not found</string>
+    <string name="msg_failed_to_get_content">Failed to get the content</string>
+    <string name="msg_not_supported_on_google_drive">This file type is not supported now. (Files on Google Drive)</string>
+
+    <string name="need_permission">Need permission!</string>
+    <string name="msg_need_permission">Please grant "Storage access".</string>
+    <string name="app_setting">App setting</string>
+    <string name="close">Close</string>
+    <string name="create_shortcut">Create shortcut</string>
+
+    <string name="open_source_license">Open source license</string>
+    <string name="action_more">More</string>
+</resources>
