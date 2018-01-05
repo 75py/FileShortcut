@@ -1,4 +1,4 @@
-# File Shortcut
+# File Shortcut [![Build Status](https://travis-ci.org/75py/FileShortcut.svg?branch=master)](https://travis-ci.org/75py/FileShortcut)
 
 Create shortcuts to open your files!
 
