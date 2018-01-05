@@ -27,6 +27,7 @@
     <string name="msg_not_launchable">エラー： ファイルを開けるアプリが見つかりません</string>
     <string name="msg_failed_to_get_content">コンテンツの取得に失敗しました</string>
     <string name="msg_not_supported_on_google_drive">このファイルタイプはサポートしていません。（Googleドライブ上のファイル）</string>
+    <string name="msg_not_supported_pinned_shortcuts">ホームアプリがこのショートカット作成方法に対応していません。\nホーム画面の長押しで「ウィジェット」をタップしてファイルショートカットを開いてください。</string>
 
     <string name="need_permission">許可が必要です</string>
     <string name="msg_need_permission">「ストレージ」の許可が必要です。</string>
