@@ -80,7 +80,7 @@ class CreatedShortcutListActivity : KodeinAppCompatActivity(), AdapterView.OnIte
             val convertView: View
             if (paramConvertView == null) {
                 val inflater = LayoutInflater.from(context)
-                binding = DataBindingUtil.inflate(inflater, R.layout.item_created_shortcut, parent, false);
+                binding = DataBindingUtil.inflate(inflater, R.layout.item_created_shortcut, parent, false)
                 convertView = binding.root
                 convertView.tag = binding
             } else {

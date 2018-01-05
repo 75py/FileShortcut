@@ -17,7 +17,6 @@
 package com.nagopy.android.fileshortcut
 
 import android.Manifest
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.ShortcutManager
 import android.databinding.DataBindingUtil
@@ -196,13 +195,13 @@ class CreateShortcutActivity : KodeinAppCompatActivity(), View.OnClickListener {
         AlertDialog.Builder(this)
                 .setTitle(R.string.need_permission)
                 .setMessage(R.string.msg_need_permission)
-                .setPositiveButton(R.string.app_setting, DialogInterface.OnClickListener { dialogInterface, i ->
+                .setPositiveButton(R.string.app_setting, { _, _ ->
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     val uri = Uri.fromParts("package", packageName, null)
                     intent.data = uri
                     startActivity(intent)
                 })
-                .setNegativeButton(R.string.close, DialogInterface.OnClickListener { dialogInterface, i -> finish() })
+                .setNegativeButton(R.string.close, { _, _ -> finish() })
                 .show()
     }
 
