@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.1.1](https://github.com/75py/FileShortcut/tree/2.1.1) (2018-01-05)
+[Full Changelog](https://github.com/75py/FileShortcut/compare/2.1.0...2.1.1)
+
+**Merged pull requests:**
+
+- Hotfix \(2 bugs in 2.1.0\) [\#6](https://github.com/75py/FileShortcut/pull/6) ([75py](https://github.com/75py))
+
 ## [2.1.0](https://github.com/75py/FileShortcut/tree/2.1.0) (2018-01-05)
 [Full Changelog](https://github.com/75py/FileShortcut/compare/2.0.0...2.1.0)
 
