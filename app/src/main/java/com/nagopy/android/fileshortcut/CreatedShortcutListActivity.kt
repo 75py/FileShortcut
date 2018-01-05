@@ -107,7 +107,7 @@ class CreatedShortcutListActivity : KodeinAppCompatActivity(), AdapterView.OnIte
             val shortcutInfo = getItem(position)
             binding.id = shortcutInfo.id
             binding.icon = convertToBitmap(shortcutInfo.intent.getStringExtra(EXTRA_ICON))
-            binding.label = shortcutInfo.longLabel.toString()
+            binding.label = shortcutInfo.shortLabel?.toString()
             binding.path = shortcutInfo.intent.getStringExtra(EXTRA_PATH)
             binding.iconMaxWidth = iconMaxWidth
             binding.iconMaxHeight = iconMaxHeight
@@ -129,7 +129,11 @@ class CreatedShortcutListActivity : KodeinAppCompatActivity(), AdapterView.OnIte
          * @param bitmap
          * @return converting bitmap and return a string
          */
-        fun convertToString(bitmap: Bitmap): String {
+        fun convertToString(bitmap: Bitmap?): String? {
+            if (bitmap == null) {
+                return null
+            }
+
             val stream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
             val b = stream.toByteArray()
@@ -140,7 +144,11 @@ class CreatedShortcutListActivity : KodeinAppCompatActivity(), AdapterView.OnIte
          * @param encodedString
          * @return bitmap (from given string)
          */
-        fun convertToBitmap(encodedString: String): Bitmap? {
+        fun convertToBitmap(encodedString: String?): Bitmap? {
+            if (encodedString == null) {
+                return null
+            }
+
             return try {
                 val encodeByte = Base64.decode(encodedString, Base64.DEFAULT)
                 BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
