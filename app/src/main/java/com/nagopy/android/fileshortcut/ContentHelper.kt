@@ -139,13 +139,7 @@ class ContentHelper(val context: Context, val contentResolver: ContentResolver) 
      * @return File path
      */
     fun getPath(uri: Uri): String? {
-        Timber.d("File - Authority: %s\n"
-                + ", Fragment: %s\n"
-                + ", Port: %s\n"
-                + ", Query: %s\n"
-                + ", Scheme: %s\n"
-                + ", Host: %s\n"
-                + ", Segments: %s"
+        Timber.d("File - Authority: %s\n, Fragment: %s\n, Port: %s\n, Query: %s\n, Scheme: %s\n, Host: %s\n, Segments: %s"
                 , uri.authority
                 , uri.fragment
                 , uri.port
