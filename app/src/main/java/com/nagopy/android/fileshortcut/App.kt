@@ -20,6 +20,8 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ShortcutManager
+import android.os.Build
 import android.widget.Toast
 import com.github.salomonbrys.kodein.Kodein
 import com.github.salomonbrys.kodein.KodeinAware
@@ -52,6 +54,9 @@ class App : Application(), KodeinAware {
             bind<ContentHelper>() with singleton { ContentHelper(this@App, this@App.contentResolver) }
             bind<ShortcutCreator>() with singleton { ShortcutCreator() }
             bind<PackageManager>() with singleton { this@App.packageManager }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                bind<ShortcutManager>() with singleton { getSystemService(ShortcutManager::class.java) }
+            }
         }
     }
 }

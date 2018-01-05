@@ -16,8 +16,10 @@
 
 package com.nagopy.android.fileshortcut
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
 import android.os.Build
 import android.support.v4.content.pm.ShortcutInfoCompat
@@ -39,6 +41,9 @@ class ShortcutCreator {
                 .setAction(Intent.ACTION_MAIN)
                 .putExtra(LaunchShortcutActivity.EXTRA_PATH, pathString)
                 .putExtra(LaunchShortcutActivity.EXTRA_MIMETYPE, mimeType)
+                .putExtra(CreatedShortcutListActivity.EXTRA_ICON
+                        , CreatedShortcutListActivity.convertToString(icon))
+
         val shortcutInfo = ShortcutInfoCompat.Builder(activity, "id_" + System.currentTimeMillis())
                 .setLongLabel(shortcutName)
                 .setShortLabel(shortcutName)
@@ -60,6 +65,34 @@ class ShortcutCreator {
                 activity.finish()
             }
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    fun update(activity: Activity
+               , id: String
+               , pathString: String
+               , shortcutName: String
+               , mimeType: String
+               , icon: Bitmap) {
+        Timber.d("path: %s\nname: %s\nmimeType: %s", pathString, shortcutName, mimeType)
+
+        val shortcutIntent = Intent(activity, LaunchShortcutActivity::class.java)
+                .setAction(Intent.ACTION_MAIN)
+                .putExtra(LaunchShortcutActivity.EXTRA_PATH, pathString)
+                .putExtra(LaunchShortcutActivity.EXTRA_MIMETYPE, mimeType)
+                .putExtra(CreatedShortcutListActivity.EXTRA_ICON
+                        , CreatedShortcutListActivity.convertToString(icon))
+
+        val shortcutInfo = ShortcutInfoCompat.Builder(activity, id)
+                .setLongLabel(shortcutName)
+                .setShortLabel(shortcutName)
+                .setIcon(IconCompat.createWithBitmap(icon))
+                .setIntent(shortcutIntent)
+                .build()
+
+        val shortcutManager = activity.getSystemService(ShortcutManager::class.java)
+        shortcutManager.updateShortcuts(mutableListOf(shortcutInfo.toShortcutInfo()))
+        activity.finish()
     }
 
 }
