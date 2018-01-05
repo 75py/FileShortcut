@@ -57,6 +57,10 @@
         </activity>
 
         <activity
+            android:name=".CreatedShortcutListActivity"
+            android:label="@string/action_edit" />
+
+        <activity
             android:name=".LicenseActivity"
             android:label="@string/open_source_license" />
     </application>

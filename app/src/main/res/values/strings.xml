@@ -34,7 +34,9 @@
     <string name="app_setting">App setting</string>
     <string name="close">Close</string>
     <string name="create_shortcut">Create shortcut</string>
+    <string name="edit_shortcut">Edit shortcut</string>
 
     <string name="open_source_license">Open source license</string>
     <string name="action_more">More</string>
+    <string name="action_edit">Edit created shortcuts</string>
 </resources>

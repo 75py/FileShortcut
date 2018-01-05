@@ -19,10 +19,12 @@ package com.nagopy.android.fileshortcut
 import android.Manifest
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.ShortcutManager
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
@@ -116,11 +118,16 @@ class CreateShortcutActivity : KodeinAppCompatActivity(), View.OnClickListener {
     }
 
     fun createShortcut() {
+        val id = binding.id
         val pathString = binding.targetFilePath.text.toString()
         val shortcutName = binding.targetShortcutName.text.toString()
         val mimeType = contentHelper.getMimeType(pathString)
         val iconBitmap = getIconBitmap(binding.targetShortcutIcon)
-        shortcutCreator.create(this, pathString, shortcutName, mimeType, iconBitmap)
+        if (id == null) {
+            shortcutCreator.create(this, pathString, shortcutName, mimeType, iconBitmap)
+        } else {
+            shortcutCreator.update(this, id, pathString, shortcutName, mimeType, iconBitmap)
+        }
     }
 
     fun getIconBitmap(imageView: ImageView): Bitmap {
@@ -168,6 +175,17 @@ class CreateShortcutActivity : KodeinAppCompatActivity(), View.OnClickListener {
             REQUEST_CODE_ICON -> {
                 binding.shortcutIcon = data?.data
             }
+            REQUEST_CODE_HISTORY -> {
+                val id = data?.getStringExtra(CreatedShortcutListActivity.EXTRA_RESULT_ID)
+                val path = data?.getStringExtra(CreatedShortcutListActivity.EXTRA_RESULT_PATH)
+                val name = data?.getStringExtra(CreatedShortcutListActivity.EXTRA_RESULT_NAME)
+                val icon = data?.getParcelableExtra(CreatedShortcutListActivity.EXTRA_RESULT_ICON) as? Bitmap
+                binding.id = id
+                binding.filePath = path
+                binding.shortcutName = name
+                binding.mimeType = contentHelper.getMimeType(path)
+                binding.targetShortcutIcon.setImageBitmap(icon)
+            }
         }
     }
 
@@ -191,10 +209,21 @@ class CreateShortcutActivity : KodeinAppCompatActivity(), View.OnClickListener {
     companion object {
         val REQUEST_CODE_FILE = 75
         val REQUEST_CODE_ICON = 76
+        val REQUEST_CODE_HISTORY = 77
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_create_shortcut, menu)
+
+        menu?.findItem(R.id.menu_history)?.isVisible = false
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val shortcutManager: ShortcutManager by instance()
+            if (intent?.categories?.contains(Intent.CATEGORY_LAUNCHER) == true // from home app
+                    && shortcutManager.pinnedShortcuts.isNotEmpty()) {
+                menu?.findItem(R.id.menu_history)?.isVisible = true
+            }
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -202,6 +231,9 @@ class CreateShortcutActivity : KodeinAppCompatActivity(), View.OnClickListener {
         when (item?.itemId) {
             R.id.menu_license -> {
                 startActivity(Intent(this, LicenseActivity::class.java))
+            }
+            R.id.menu_history -> {
+                startActivityForResult(Intent(this, CreatedShortcutListActivity::class.java), REQUEST_CODE_HISTORY)
             }
         }
         return super.onOptionsItemSelected(item)

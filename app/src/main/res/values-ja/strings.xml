@@ -34,8 +34,10 @@
     <string name="app_setting">設定画面へ</string>
     <string name="close">閉じる</string>
     <string name="create_shortcut">ショートカットを作成</string>
+    <string name="edit_shortcut">ショートカットを編集</string>
 
     <string name="open_source_license">オープンソースライセンス</string>
     <string name="action_more">More</string>
+    <string name="action_edit">作成済みのショートカットを編集</string>
 
 </resources>
